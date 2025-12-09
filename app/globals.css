@@ -18,7 +18,7 @@
     @apply font-semibold;
   }
   .form {
-    @apply flex flex-col w-full h-full gap-7 bg-white/10 backdrop-blur-sm p-5 text-gray-950 dark:text-gray-50;
+    @apply flex flex-col w-full h-full gap-7 bg-white/10 backdrop-blur-sm p-5 text-gray-950 dark:text-gray-50 shadow-2xl;
   }
   .input {
     @apply h-10 p-2 border-b-2 border-b-black dark:border-b-gray-50 focus:outline-none;
