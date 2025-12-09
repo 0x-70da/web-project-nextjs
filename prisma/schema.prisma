@@ -12,3 +12,52 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  role      Role     @default(USER)
+  blocked   Boolean  @default(false)
+  blockedUsers BlockedUser[]
+
+  messagesSent     Message[] @relation("MessagesSent")
+  messagesReceived Message[] @relation("MessagesReceived")
+  activities       Activity[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  content   String
+  timestamp DateTime @default(now())
+
+  sender     User @relation("MessagesSent", fields: [senderId], references: [id])
+  senderId   Int
+
+  recipient  User @relation("MessagesReceived", fields: [recipientId], references: [id])
+  recipientId Int
+}
+
+model Activity {
+  id        Int      @id @default(autoincrement())
+  type      String
+  details   String?
+  timestamp DateTime @default(now())
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+}
+
+model BlockedUser {
+  id        Int      @id @default(autoincrement())
+  reason    String?
+  timestamp DateTime @default(now())
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+}
