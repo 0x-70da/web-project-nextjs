@@ -1,6 +1,6 @@
 import prisma from "@/lib/db";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import {SignJWT} from "jose";
 import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
@@ -17,15 +17,16 @@ export async function POST(req: Request) {
     // لازم الفرونت يعمل trim للباسسورد يجدعان
     return Response.json({ success: false, message: "Wrong Password" }, {status: 401 });
 
-  const token = jwt.sign(
+  const token = await new SignJWT(
     { id: user.id, username: user.username, role: user.role },
-    process.env.JWT_SECRET_KEY!,
-    { expiresIn: rememberMe ? "7d" : "1d" },
-  );
-
+  )
+  .setProtectedHeader({ alg: "HS256" })
+  .setExpirationTime(rememberMe ? "7d" : "1d")
+  .sign(new TextEncoder().encode(process.env.JWT_SECRET_KEY!));
   (await cookies()).set('token', token, {
     httpOnly: true,
     maxAge: rememberMe ? 7 * 24 * 60 * 60 : 24 * 60 * 60, // 7 days or 1 day
+    path: '/',
   });
 
   return Response.json({
