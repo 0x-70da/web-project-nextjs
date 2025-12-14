@@ -10,5 +10,8 @@ export async function isAdminLoggedInMiddleware(request: NextRequest) {
     if(token && role === "ADMIN") {
         return NextResponse.redirect(new URL("/admin/users", request.url));
     }
+    if(token && role !== "ADMIN") {
+        return NextResponse.redirect(new URL("/not-authorized", request.url));
+    }
     return NextResponse.next();
 }
