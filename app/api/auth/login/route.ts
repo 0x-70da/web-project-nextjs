@@ -12,6 +12,9 @@ export async function POST(req: Request) {
       { success: false, message: "User not found" }, {status: 404 },
     );
 
+  if(user.blocked)
+    return Response.json({ success: false, message: "User is blocked" }, {status: 403 });
+
   const match = await bcrypt.compare(password, user.password);
   if (!match)
     // لازم الفرونت يعمل trim للباسسورد يجدعان
