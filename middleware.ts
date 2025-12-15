@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { authMiddleware } from "./app/lib/middlewares/authMiddleware";
-import { adminMiddleware } from "./app/lib/middlewares/adminMiddleware";
-import { isLoggedInMiddleware } from "./app/lib/middlewares/isLoggedInMiddleware";
-import { isAdminLoggedInMiddleware } from "./app/lib/middlewares/isAdminLoggedInMiddleware";
+import { authMiddleware } from "./lib/middlewares/authMiddleware";
+import { adminMiddleware } from "./lib/middlewares/adminMiddleware";
+import { isLoggedInMiddleware } from "./lib/middlewares/isLoggedInMiddleware";
+import { isAdminLoggedInMiddleware } from "./lib/middlewares/isAdminLoggedInMiddleware";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
