@@ -22,7 +22,7 @@ export async function middleware(request: NextRequest) {
     //   }
     // }
     // return NextResponse.next();
-    if(pathname.startsWith("/dashboard")) { 
+    if(pathname.startsWith("/dashboard") || pathname.startsWith("/me")) { 
       return authMiddleware(request);
     }
     if(pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) { 
@@ -41,5 +41,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin/:path*", "/login", "/admin/login"],
+  matcher: ["/dashboard/:path*", "/admin/:path*", "/login", "/admin/login", "/me"],
 };

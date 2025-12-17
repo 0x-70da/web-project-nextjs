@@ -28,6 +28,7 @@ const LoginPage = () => {
       const data = await res.json();
       if(data.success){
         router.push('/');
+        router.refresh();
       }else {
         alert(data.message);
       }
