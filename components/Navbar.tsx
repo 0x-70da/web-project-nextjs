@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="flex justify-between items-center h-15 w-full p-5 bg-white/10 backdrop-blur-sm text-gray-950 shadow-lg fixed">
+    <header className="flex justify-between items-center h-15 w-full p-5 bg-white/10 backdrop-blur-sm text-gray-950 shadow-lg fixed z-1">
       <section className="flex items-center p-3 w-[20%]">
         <Link href="/" className="flex items-center">
           <Image

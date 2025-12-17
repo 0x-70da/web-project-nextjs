@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LightRays from "@/components/LightRays";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Web Project for College",
@@ -29,6 +30,7 @@ export default function RootLayout({
             className="custom-rays"
           />
         </div>
+        <Navbar />
         {children}
       </body>
     </html>
