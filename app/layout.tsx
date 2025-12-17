@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LightRays from "@/components/LightRays";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/header/Header";
 
 export const metadata: Metadata = {
   title: "Web Project for College",
