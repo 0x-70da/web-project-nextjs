@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const AllUsersPage = () => {
@@ -39,7 +40,7 @@ const AllUsersPage = () => {
   }, [])
 
   return (
-    <div className="h-screen w-full p-5">
+    <div className="h-screen w-full p-5 py-15">
       <table className="w-full table-auto border-collapse border-2 border-green-700">
         <thead>
           <tr className="cell">
@@ -58,7 +59,7 @@ const AllUsersPage = () => {
               username: string;
               email: string;
               role: string;
-              messagesSent: number;
+              messagesSent: number[];
               blocked: boolean;
             }) => (
               <tr key={user.id} className="text-center cell">
@@ -66,9 +67,9 @@ const AllUsersPage = () => {
                 <td>{user.username}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
-                <td>{user.messagesSent}</td>
+                <td><Link href={`/admin/users/${user.id}/messages`}>{user.messagesSent.length}</Link></td>
                 <td>
-                  <button onClick={() => blockUser(user.id)} className="btn w-30">{user.blocked ? "Unblock" : "Block"} User</button>
+                  <button onClick={() => blockUser(user.id)} className={`btn w-30 ${user.blocked ? "" : "bg-red-700"}`}>{user.blocked ? "Unblock" : "Block"} User</button>
                 </td>
               </tr>
             )

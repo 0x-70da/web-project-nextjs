@@ -1,10 +1,12 @@
 'use client';
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const AdminLoginPage = () => { // I know that I duplicated this code
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -23,6 +25,8 @@ const AdminLoginPage = () => { // I know that I duplicated this code
 
     if(data.success) {
       alert("Welcome Admin");
+      router.push("/admin/users");
+      router.refresh();
     }else {
       alert(data.message);
     }
