@@ -4,7 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @layer base {
-
+  td, th {
+    @apply p-3 text-center border-2 border-green-700;
+  }
 }
 
 @layer components {

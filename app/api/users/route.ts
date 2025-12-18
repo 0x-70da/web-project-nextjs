@@ -12,6 +12,6 @@ export async function GET(request: NextRequest) {
         return Response.json({success: false, message: "Forbidden"}, { status: 403 });
     }
 
-    const users = await prisma.user.findMany({select: { id: true, username: true, email: true, role: true, messagesSent: true, blocked: true }});
+    const users = await prisma.user.findMany({select: { id: true, username: true, email: true, role: true, messagesSent: true, blocked: true }, orderBy: { id: "asc" }});
     return Response.json({ success: true, users }, { status: 200 });
 }
