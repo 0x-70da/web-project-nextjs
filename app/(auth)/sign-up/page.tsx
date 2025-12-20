@@ -42,20 +42,15 @@ const SignUpPage = () => {
   }
   return (
     <main className="flex justify-center items-center w-full h-screen p-15">
-      <form onSubmit={handleSubmit} className="form w-100 h-140">
+      <form onSubmit={handleSubmit} className="form w-100 h-110">
         <h1 className="text-4xl text-green-700 font-bold">Sign Up</h1>
-        <input
-          type="text"
-          name="fullName"
-          placeholder="Full Name..."
-          className="input"
-        />
         <input
           type="text"
           name="username"
           placeholder="Username..."
           onChange={(e) => setUsername(e.target.value.trim())}
           className="input"
+          required
         />
         <input
           type="email"
@@ -63,6 +58,7 @@ const SignUpPage = () => {
           placeholder="Email..."
           onChange={(e) => setEmail(e.target.value.trim())}
           className="input"
+          required
         />
         <input
           type="password"
@@ -70,12 +66,7 @@ const SignUpPage = () => {
           placeholder="Password..."
           onChange={(e) => setPassword(e.target.value.trim())}
           className="input"
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password..."
-          className="input"
+          required
         />
         <button type="submit" className="btn w-full">
           Sign Up
