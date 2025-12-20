@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const SendMessagePage = () => {
   const [message, setMessage] = useState('');
@@ -17,10 +18,10 @@ const SendMessagePage = () => {
       });
       const data = await res.json();
       if (data.success) {
-        alert("Message sent successfully");
+        toast.success(data.message);
         setMessage('');
       } else {
-        alert("Failed to send message: " + data.message);
+        toast.error("Failed to send message: " + data.message);
       }
     } catch (error) {
       console.error("Error sending message:", error);

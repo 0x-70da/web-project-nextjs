@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -27,15 +28,16 @@ const SignUpPage = () => {
 
       const data = await res.json();
       if(data.success){
+        toast.success("Account created successfully! Please log in.");
         router.push('/login')
       }
       else {
-        alert(data.message);
+        toast.error(data.message);
       }
 
     } catch(err) {
       console.error("Error during sign up:", err);
-      alert("An error occurred during sign up. Please try again.");
+      toast.error("An error occurred during sign up. Please try again.");
     }
   }
   return (

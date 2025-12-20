@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const ChangePasswordPage = () => {
   const [password, setPassword] = useState('');
@@ -19,12 +20,12 @@ const ChangePasswordPage = () => {
 
       const data = await res.json();
       if(data.success){
-        alert('Password changed successfully');
+        toast.success(data.message);
       } else {
-        alert('Error changing password: ' + data.message);
+        toast.error(data.message);
       }
     } catch (error) {
-      alert('An unexpected error occurred');
+      toast.error('An unexpected error occurred: ' + error);
     }
 
   }

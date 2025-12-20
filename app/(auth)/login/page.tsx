@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -27,15 +28,16 @@ const LoginPage = () => {
 
       const data = await res.json();
       if(data.success){
+        toast.success("Logged in successfully!");
         router.push('/');
         router.refresh();
       }else {
-        alert(data.message);
+        toast.error(data.message);
       }
 
     } catch(err) {
       console.error("Error during login:", err);
-      alert("An error occurred during login. Please try again.");
+      toast.error("An error occurred during login. Please try again.");
     }
   }
 

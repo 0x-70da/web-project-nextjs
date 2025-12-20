@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const AllUsersPage = () => {
   const getUsers = async () => {
@@ -28,10 +29,10 @@ const AllUsersPage = () => {
     });
     const data = await res.json();
     if (data.success) {
-      alert("User blocked successfully");
+      toast.success(data.message);
       getUsers();
     } else {
-      alert(data.message);
+      toast.error(data.message);
     }
   }
   const [users, setUsers] = useState([]);
