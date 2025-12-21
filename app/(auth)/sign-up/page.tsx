@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -27,33 +28,29 @@ const SignUpPage = () => {
 
       const data = await res.json();
       if(data.success){
+        toast.success("Account created successfully! Please log in.");
         router.push('/login')
       }
       else {
-        alert(data.message);
+        toast.error(data.message);
       }
 
     } catch(err) {
       console.error("Error during sign up:", err);
-      alert("An error occurred during sign up. Please try again.");
+      toast.error("An error occurred during sign up. Please try again.");
     }
   }
   return (
     <main className="flex justify-center items-center w-full h-screen p-15">
-      <form onSubmit={handleSubmit} className="form w-100 h-140">
+      <form onSubmit={handleSubmit} className="form w-100 h-110">
         <h1 className="text-4xl text-green-700 font-bold">Sign Up</h1>
-        <input
-          type="text"
-          name="fullName"
-          placeholder="Full Name..."
-          className="input"
-        />
         <input
           type="text"
           name="username"
           placeholder="Username..."
           onChange={(e) => setUsername(e.target.value.trim())}
           className="input"
+          required
         />
         <input
           type="email"
@@ -61,6 +58,7 @@ const SignUpPage = () => {
           placeholder="Email..."
           onChange={(e) => setEmail(e.target.value.trim())}
           className="input"
+          required
         />
         <input
           type="password"
@@ -68,12 +66,7 @@ const SignUpPage = () => {
           placeholder="Password..."
           onChange={(e) => setPassword(e.target.value.trim())}
           className="input"
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password..."
-          className="input"
+          required
         />
         <button type="submit" className="btn w-full">
           Sign Up

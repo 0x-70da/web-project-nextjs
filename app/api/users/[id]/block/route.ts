@@ -11,7 +11,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
             where: { id: parseInt(id) },
             data: { blocked : !isBlocked?.blocked },
         });
-        return Response.json({ success: true, message: "User blocked successfully" }, { status: 200 });
+        return Response.json({ success: true, message: isBlocked?.blocked ? "User unblocked successfully" : "User blocked successfully" }, { status: 200 });
     } catch (err) {
         return Response.json({ success: false, message: "Error blocking user" }, { status: 500 });
     }

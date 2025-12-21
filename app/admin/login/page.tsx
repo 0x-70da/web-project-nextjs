@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const AdminLoginPage = () => { // I know that I duplicated this code
   const [username, setUsername] = useState('');
@@ -24,11 +25,11 @@ const AdminLoginPage = () => { // I know that I duplicated this code
     const data = await res.json();
 
     if(data.success) {
-      alert("Welcome Admin");
+      toast.success("Welcome back, Admin!");
       router.push("/admin/users");
       router.refresh();
     }else {
-      alert(data.message);
+      toast.error(data.message);
     }
   }
 
